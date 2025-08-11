@@ -1,2 +1,0 @@
-# lexx-store
-store gag
