@@ -1,0 +1,640 @@
+/* ====================
+   Global & Variabel
+   ==================== */
+:root {
+    --bg-color: #121212;
+    --card-bg-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --primary-color: #ffc107;
+    --accent-color: #ffffff;
+    --border-radius: 12px;
+    --input-bg-color: #333333;
+    --divider-color: #444444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: url('https://files.catbox.moe/r4346g.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ====================
+   Preloader
+   ==================== */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ====================
+   Layout & Halaman
+   ==================== */
+.page {
+    width: 100%;
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.page.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ====================
+   Header & Banner
+   ==================== */
+header {
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.header-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.header-profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ff3b3b;
+    animation: profileAnim 1s ease-in-out forwards;
+    opacity: 0;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.header-text h2 {
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.header-text h1 {
+    color: var(--accent-color);
+    font-size: 2em;
+    margin: 0;
+}
+
+.header-banner {
+    width: 100%;
+    height: 150px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+    animation: bannerAnim 1.2s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.header-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-color);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+.banner-overlay h3 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.banner-overlay p {
+    font-size: 0.9em;
+    margin: 5px 0 0;
+}
+
+/* ====================
+   Grid Produk
+   ==================== */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px 0;
+}
+
+.product-item {
+    background-color: var(--card-bg-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    opacity: 0;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.product-item .bg-yellow {
+    background-color: var(--primary-color);
+    padding: 10px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+.product-item .bg-yellow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0);
+    transition: background-color 0.3s ease;
+}
+
+.product-item:hover .bg-yellow::before {
+    background-color: rgba(0,0,0,0.2);
+}
+
+
+.product-item img {
+    width: 90%;
+    max-height: 100%;
+    object-fit: contain;
+    margin-top: 0;
+    transition: transform 0.3s ease;
+}
+.product-item:hover img {
+    transform: scale(1.1);
+}
+
+.product-item .info {
+    padding: 10px;
+}
+
+.product-item h3 {
+    font-size: 1.1em;
+    margin: 5px 0;
+    color: var(--accent-color);
+}
+
+.product-item p {
+    font-size: 0.9em;
+    color: var(--text-color);
+    margin: 3px 0;
+}
+
+.product-item .stock {
+    color: #9e9e9e;
+    font-size: 0.8em;
+}
+
+/* ====================
+   Halaman Pesanan
+   ==================== */
+.order-container {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-back {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid #444;
+    margin-bottom: 20px;
+    align-self: flex-start;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+}
+.btn-back svg {
+    width: 16px;
+    height: 16px;
+}
+
+.order-image-box {
+    background-color: var(--card-bg-color);
+    height: 250px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.order-image-box::before {
+    content: 'This is what you ordered';
+    position: absolute;
+    top: 20px;
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.order-image-box img {
+    max-width: 150px;
+    max-height: 150px;
+    border: 2px solid white;
+    background-color: #00000000;
+    padding: 20px;
+    border-radius: 12px;
+ }
+
+.order-content-wrapper {
+    background-color: var(--card-bg-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.form-control, .btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    background-color: #444;
+}
+
+.btn {
+    cursor: pointer;
+    background-color: #f44336;
+    color: var(--accent-color);
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid transparent;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    filter: brightness(0.9);
+}
+
+.form-group.payment-input {
+    position: relative;
+}
+
+.form-group.payment-input .form-control {
+    cursor: pointer;
+}
+
+/* ====================
+   Modal Pembayaran
+   ==================== */
+.modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: flex-end;
+    z-index: 100;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    background-color: var(--card-bg-color);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content h3 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: var(--input-bg-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.payment-option:hover {
+    background-color: #444;
+}
+
+.payment-option.selected {
+    border: 2px solid var(--primary-color);
+}
+
+.payment-option img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: auto;
+}
+footer a {
+    color: #25D366;
+    text-decoration: none;
+}
+
+/* ====================
+   Opsi Titan
+   ==================== */
+.option-container {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-option {
+    flex: 1;
+    padding: 12px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--divider-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-option:hover {
+    background-color: #444;
+}
+
+.btn-option.selected {
+    border: 2px solid var(--primary-color);
+    background-color: #444;
+}
+
+/* ====================
+   Halaman Tentang Kami & FAQ
+   ==================== */
+.about-page-body {
+    background-image: url('https://files.catbox.moe/r4346g.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: var(--bg-color);
+}
+
+.about-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.about-header {
+    background-color: var(--card-bg-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-header h1 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.about-header p {
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.faq-section {
+    background-color: var(--card-bg-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+}
+
+.faq-section h2 {
+    font-size: 2em;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--divider-color);
+    padding: 15px 0;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-item h3 {
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.faq-item p {
+    color: #b0b0b0;
+    line-height: 1.5;
+}
+
+/* ====================
+   Animasi Fade-in
+   ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes profileAnim {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes bannerAnim {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ====================
+   Responsif
+   ==================== */
+@media (min-width: 600px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .order-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding-top: 50px;
+    }
+    .page {
+        padding: 40px;
+    }
+}
+
+@media (min-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

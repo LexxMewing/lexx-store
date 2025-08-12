@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexx Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="preloader">
+    <div class="spinner"></div>
+</div>
+<main>
+    <div id="main-page" class="page active">
+        <header>
+            <div class="header-profile">
+                <div class="header-profile-avatar">
+                    <img src="https://files.catbox.moe/nj5gqk.jpg" alt="Profil">
+                </div>
+                <div class="header-text">
+                    <h2>Welcome To</h2>
+                    <h1>Lexx Store</h1>
+                </div>
+            </div>
+            <div class="header-banner">
+                <img src="https://files.catbox.moe/ip7qxi.jpg" alt="Banner">
+                <div class="banner-overlay">
+                    <h3>Dapatkan Item Langka Sekarang!</h3>
+                    <p>100% Aman dan Transaksi Cepat</p>
+                </div>
+            </div>
+        </header>
+
+        <div id="product-list" class="product-grid">
+        </div>
+    </div>
+
+    <div id="order-page" class="page">
+        <div class="order-container">
+            <button class="btn-back" onclick="goToMainPage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-down-left"><polyline points="9 10 4 15 9 20"></polyline><path d="M20 4v7a4 4 0 0 1-4 4H4"></path></svg>
+                Kembali
+            </button>
+            <div id="order-image-box" class="order-image-box">
+                <img id="selected-product-img" src="" alt="Selected Product">
+            </div>
+            <div class="order-content-wrapper">
+                <form id="order-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="form-control" placeholder="Masukkan username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-name">Nama Produk</label>
+                        <input type="text" id="product-name" class="form-control" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input type="text" id="harga" class="form-control" readonly>
+                    </div>
+
+                    <div id="titan-options-group" class="form-group" style="display: none;">
+                        <label>Pilih Ukuran Titan</label>
+                        <div class="option-container">
+                            <button type="button" class="btn-option" data-option="Huge" onclick="selectTitanOption('Huge')">
+                                Huge (Sisa 1)
+                            </button>
+                            <button type="button" class="btn-option" data-option="Mega" onclick="selectTitanOption('Mega')">
+                                Mega (Sisa 1)
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group payment-input">
+                        <label for="payment">Pembayaran</label>
+                        <input type="text" id="payment" class="form-control" placeholder="Pilih metode pembayaran" readonly onclick="showPaymentModal()">
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsapp">Nomor WhatsApp (Opsional)</label>
+                        <input type="tel" id="whatsapp" class="form-control" placeholder="Contoh: 628xxxxx">
+                    </div>
+                    <button type="submit" class="btn" id="buy-now-btn">Beli Sekarang</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <h3>Pilih Metode Pembayaran</h3>
+            <div id="payment-options-container">
+                <div class="payment-option" data-method="QRIS" onclick="selectPayment('QRIS')">
+                    <img src="https://files.catbox.moe/at3p4w.png" alt="QRIS">
+                    <span>QRIS</span>
+                </div>
+                <div class="payment-option" data-method="Dana" onclick="selectPayment('Dana')">
+                    <img src="https://files.catbox.moe/m3nzmr.png" alt="Dana">
+                    <span>Dana</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="hidePaymentModal()">OK</button>
+            </div>
+        </div>
+    </div>
+  <div class="header-divider"></div>
+</main>
+
+<footer>
+    ✅ Aman — No Scam — No Anti Dupe <br>
+    Kami selalu menjaga keamanan transaksi Anda. <br>
+    <a href="about.html">Tentang Kami & FAQ</a> | 📢 Hubungi kami di
+    <a href="https://wa.me/628129120098690" target="_blank">Nomor WhatsApp ini</a>
+</footer>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
